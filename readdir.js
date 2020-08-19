@@ -2,22 +2,11 @@ const fs = require('fs');
 const path = require('path');
 const dirname = path.resolve(__dirname, './file');
 
-start();
-async function readdir(dir) {
-    const pathes = await fs.promises.readdir(dir);
-    let arr = [];
-    for (let i = 0; i < pathes.length; i++) {
-        const filename = path.resolve(dir, pathes[i]);
-        arr.push(await File.getFile(filename));
-    }
-    return arr;
-}
 
-async function start() {
-    const arr = await readdir(dirname);
-    const testdir =  await arr[2].getChildren();
-    const testfile = await arr[0].getContent();
-    console.log(testdir,testfile)
+async function readdir(dirname) {
+    const file = await File.getFile(dirname);
+    console.log(file);
+    console.log(await file.getChildren());
 }
 class File {
     constructor(filename, name, ext, isFile, size, createTime, updateTime) {
@@ -30,7 +19,13 @@ class File {
         this.updateTime = updateTime;
     }
     async getChildren() {//得到目录的所有子文件对象，如果是文件，则返回空数组
-        return this.isFile ? [] : await fs.promises.readdir(this.filename);
+        if(this.isFile) return [];
+        let children = await fs.promises.readdir(this.filename);
+        children = children.map(name => {
+            const filename = path.resolve(this.filename, name);
+            return File.getFile(filename);
+        })
+        return Promise.all(children);
     }
     async getContent(isBuffer = false) {//读取问价内容，如果是目录，则返回null
         let content = null;
@@ -54,3 +49,5 @@ class File {
         return new File(filename, name, ext, isFile, size, createTime, updateTime);
     }
 }
+
+readdir(dirname);
