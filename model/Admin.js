@@ -1,22 +1,22 @@
 const sequelize = require('./db');
 const { DataTypes } = require('sequelize');
-const Admin = sequelize.define('Admin',{
-    loginId:{
+const Admin = sequelize.define('Admin', {
+    loginId: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    loginPwd:{
+    loginPwd: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    name:{
+    name: {
         type: DataTypes.STRING,
         allowNull: false,
-    }
-},{
+    },
+}, {
     createdAt: false,
     updatedAt: false,
-    paranoid: true
+    paranoid: true,
 });
 
 module.exports = Admin;

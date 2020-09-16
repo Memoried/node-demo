@@ -1,7 +1,7 @@
 const sequelize = require('./db');
 const { DataTypes } = require('sequelize');
 const Student = require('./Student');
-const Class = sequelize.define('Class',{
+const Class = sequelize.define('Class', {
     name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -9,11 +9,11 @@ const Class = sequelize.define('Class',{
     openDate: {
         type: DataTypes.DATE,
         allowNull: false,
-    }
-},{
+    },
+}, {
     updatedAt: false,
     createdAt: false,
-    paranoid: true
+    paranoid: true,
 });
 
 Class.hasMany(Student);
