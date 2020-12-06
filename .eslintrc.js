@@ -69,10 +69,10 @@ module.exports = {
       'error',
       {'beforeBlockComment': true},
     ],
-    'newline-after-var': [
-      'error',
-      'always',
-    ],
+    // 'newline-after-var': [
+    //   'error',
+    //   'always',
+    // ],
     'no-multi-assign': 'error',
     'new-cap': [
       'error',

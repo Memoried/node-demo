@@ -1,2 +1,2 @@
-//require('./model/init');
+require('./model/init');
 require('./routes/init');

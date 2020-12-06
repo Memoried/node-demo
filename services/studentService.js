@@ -57,7 +57,7 @@ exports.getStudents = async (page = 1, limit = 10, sex = -1, name = '') => {
         },
     });
 
-    console.log(JSON.stringify(result.rows));
+    // console.log(JSON.stringify(result.rows));
     
 return {
         total: result.count,

@@ -3,12 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/index.css">
-    <title>Hello NodeJS</title>
+    <title>Document</title>
 </head>
 <body>
-    <div>Hello World</div>
-    <img src="./img/th.jpeg" alt="">
+    <button id="submit">登录</button>
+    <button id="student">获取学生信息</button>
+    <script>
+        submit.addEventListener('click',() => {
+            fetch('/api/admin/login?', {
+                method: 'post',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body:JSON.stringify({
+                    loginId: 'admin',
+                    loginPwd: '123456'
+                })
+            }).then(res => {
+                return res.json()
+            }).then(res => {
+                console.log(res);
+            })
+        });
+        student.addEventListener('click',() => {
+            fetch('/api/student',{
+                method: 'get'
+            }).then(res => res.json()).then(res => {
+                console.log(res);
+            })
+        })
+    </script>
 </body>
-<script src="./script/index.js"></script>
 </html>

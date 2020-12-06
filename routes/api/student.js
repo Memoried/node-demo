@@ -3,8 +3,15 @@ const router = express.Router();
 const studentService = require('../../services/studentService');
 const Result = require('../../utils/result');
 
-router.get('/', (req, res) => {
-    res.send('获取学生列表');
+router.get('/', async (req, res) => {
+    const query = req.query;
+    const result = await studentService.getStudents(
+        query.page,
+        query.size,
+        query.sex,
+        query.name);
+    console.log(result);
+    res.send(result);
 });
 
 router.get('/:id', async (req, res, next) => {
